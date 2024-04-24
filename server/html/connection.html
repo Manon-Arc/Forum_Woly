@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./server/css/style_connection.css">
+    <link rel="stylesheet" href="./server/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/server/img/logo.png">
+    <title>Woly | Connection</title>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="backbtn"><img src="/server/img/retour.png"></a>
+        <div class="content">   
+            <form action="" method="post" class="card">
+                <img src="/server/img/woly.png" alt="" class="woly">
+                <h1 class="pancarte" id="pancarte">Login</h1>
+                <h1>Woly</h1>
+                <label for="mail" id="emailLabel">Email</label>
+                <input type="email" name="mail" id="emailInput" placeholder="exemple@domain.com" autocomplete="off">
+                <label for="username">Username</label>
+                <input type="text" name="username"  placeholder="Username" autocomplete="off">
+                <label for="password">Password</label>
+                <input type="password" name="password"  placeholder="Password" autocomplete="off">
+                <label for="confim_password" id="confplabel">Confirm password</label>
+                <input type="password" name="confim_password" id="confpinput" placeholder="Confirm Password" autocomplete="off">
+                <p>{{ . }}</p>
+                <input type="submit" value="Connect" class="button">
+                <div class="row_text">
+                    <p id="connectionText">Don't have account ?</p>
+                    <a id="changeConnectionText" onclick="changeAction()">Create it</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="/server/js/display_connection.js"></script>
+</html>

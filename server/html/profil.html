@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/server/css/style.css">
+    <link rel="stylesheet" href="/server/css/style_profil.css">
+    <title>Woly | Profil</title>
+</head>
+
+<body>
+    <div class="container">
+        <a href="/" class="backbtn"><img src="/server/img/retour.png"> </a>
+        <div class="sect1">
+            {{ if .CurrentUser.Pic }}
+            <img src="{{ .CurrentUser.Pic }}" alt="">
+            {{ else }}
+            <img src="/server/img/wolf.png" alt="">
+            {{ end }}
+            <div class="info">
+                <h1>{{ .CurrentUser.Username }}</h1>
+                <h2>{{ .CurrentUser.Mail }}</h2>
+                <p>{{ .CurrentUser.Bio }}</p>
+                {{ if .ItsMe }}
+                <a class="button" onclick="showEditProfil(editDiv)">Edit Profil</a>
+                {{ end }}
+            </div>
+        </div>
+        <div class="sect2">
+            <h1 class="title">Last Post</h1>
+            <div class="list_p">
+                {{ range .Posts}}
+                <div class="news">
+                    <div class="topicInfo">
+                        <img src="/server/img/wolf.png" alt="">
+                        <h1>{{ .Topics.Name}}</h1>
+                    </div>
+                    <div class="publication card">
+                        <div class="content">
+                            <div class="textcont">
+                                <div class="userInfo">
+                                    {{ if .Creator.Pic }}
+                                    <img src="{{ .Creator.Pic }}" alt="">
+                                    {{ else }}
+                                    <img src="/server/img/wolf.png" alt="">
+                                    {{ end }}
+                                    <h3>{{ .Creator.Username}}</h3>
+                                </div>
+                                <div class="value">
+                                    {{ if .Pic }}
+                                    <img src="{{ .Pic }}" alt="" class="post_pic">
+                                    {{ end }}
+                                    <p>{{ .Content}}</p>
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="interact">
+                            <a>
+                                {{ if eq .ILike true }}
+                                <img src="./server/img/heart_s.png" alt="">
+                                {{ else }}
+                                <img src="./server/img/heart.png" alt="">
+                                {{ end }}
+                            </a>
+                            <p>{{ .Like }}</p>
+                            <a>
+                                {{ if eq .IDislike true }}
+                                <img src="./server/img/dislike_s.png" alt="">
+                                {{ else }}
+                                <img src="./server/img/dislike.png" alt="">
+                                {{ end }}
+                            </a>
+                            <p>{{ .Dislike }}</p>
+                        </div>
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+
+        </div>
+        <div class="sect3">
+            <div class="topics">
+                <div class="list_t card">
+                    <img src="/server/img/woly.png" alt="" class="woly">
+                    <h1 class="pancarte">TOPICS</h1>
+                    {{ range .Topics}}
+                    <a class="topic" href="/topic?id={{ .Id}}">
+                        <img src="/server/img/wolf.png" alt="">
+                        <div class="info">
+                            <h2>{{ .Name}}</h2>
+                            <div class="categorie">{{ range .Categorie }}<p>{{ . }}</p>{{ end }}</div>
+                        </div>
+                    </a>
+                    {{ end}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {{ if .ItsMe }}
+    <!-- MODAL EDIT -->
+    <div class="editDiv hidden" id="editDiv">
+        <form action="" method="post"  enctype="multipart/form-data" class="card">
+            <div class="pancarte">
+                <h1>Edit Profil</h1>
+            </div>
+            <img src="/server/img/woly.png" alt="" class="woly">
+            {{ if .CurrentUser.Pic }}
+                <img src="{{ .CurrentUser.Pic }}" alt="" class="renderImg" id="renderImg">
+            {{ else }}
+                <img src="/server/img/wolf.png" alt="" class="renderImg" id="renderImg">
+            {{ end }}
+            <input type="file" id="profilpic" name="profilpic" accept="image/png, image/jpeg" onchange="imgChange(this)" max="1">
+            <label for="username">Username</label>
+            <input type="text" name="username" value="{{ .CurrentUser.Username }}" placeholder="{{ .CurrentUser.Username }}"  autocomplete="off">
+            <label for="mail">Mail</label>
+            <input type="text" name="mail" value="{{ .CurrentUser.Mail }}" placeholder="{{ .CurrentUser.Mail }}" autocomplete="off">
+            <label for="bio">Bio</label>
+            <input type="text" name="bio" value="{{ .CurrentUser.Bio }}" placeholder="{{ .CurrentUser.Bio }}" autocomplete="off">
+            <input type="submit" value="Save Change" class="button">
+        </form>
+    </div>
+    
+    <script src="/server/js/display_editprofil.js"></script>
+    {{ end }}
+</body>
+
+</html>

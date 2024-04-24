@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./server/css/style_topic.css">
+    <link rel="stylesheet" href="./server/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/server/img/logo.png">
+    <title>Woly | Topic</title>
+</head>
+
+<body>
+    {{ $ImAdmin := .IsMine }}
+    {{ $ImMod := .ImMod }}
+    {{ $isConnected := .Isconnected }}
+    {{ $imMember := .ImMember }}
+    {{ $topic := .Topic.Id }}
+    {{ $admin := .Topic.Creator }}
+
+    <div class="header">
+        <div class="left">
+            <!--javascript:history.go(-1)-->
+            <a href="/" class="backbtn"><img src="/server/img/retour.png"> </a>
+        </div>
+        {{ if $isConnected }}
+        <div class="currentUser">
+            <a href="javascript:showCreation()" class="button">+ Create</a>
+            <a href="javascript:showPophover()" class="popshow">
+                <img src="./server/img/wolf.png" alt="" id="imgCu">
+            </a>
+            <div id="cUpop" class="pophover card">
+                <a href="/profil?usr={{ .CurrentUser.Username }}" class="element" id="profil">
+                    <img src="./server/img/profil.png" alt="">
+                    <p>Profil</p>
+                </a>
+                {{ if ne $isConnected true }}
+                <a href="/connection?type=l" class="element" id="login">
+                    <img src="./server/img/login.png" alt="">
+                    <img src="./server/img/login.png" alt="">
+                    <p>Login</p>
+                </a>
+                <a href="/connection?type=r" class="element" id="register">
+                    <img src="./server/img/register.png" alt="">
+                    <p>Register</p>
+                </a>
+                {{ end }}
+                <a href="/logout" class="element" id="logout">
+                    <img src="./server/img/logout.png" alt="">
+                    <p>Logout</p>
+                </a>
+            </div>
+        </div>
+        {{ else }}
+        <div class="connectionBtn">
+            <a href="/connection?type=r">Register</a>
+            <a href="/connection?type=l" class="button">Login</a>
+        </div>
+        {{ end }}
+    </div>
+    <div class="container">
+        <div class="sect1">
+            {{ if ne $ImAdmin true }}
+            {{ if ne $ImMod true }}
+            <div class="admin visit">
+                <div class="list_ad">
+                    <div class="moderator card">
+                        {{ if .Topic.Creator.Pic }}
+                        <img src="{{ .Topic.Creator.Pic }}" alt="">
+                        {{ else }}
+                        <img src="/server/img/wolf.png" alt="">
+                        {{ end }}
+                        <div class="info">
+                            <h2>{{ .Topic.Creator.Username }}</h2>
+                            <p>Administrator</p>
+                        </div>
+                    </div>
+                    {{ range .Moderateurs}}
+                    <div class="moderator card">
+                        {{ if .Pic }}
+                        <img src="{{ .Pic }}" alt="">
+                        {{ else }}
+                        <img src="/server/img/wolf.png" alt="">
+                        {{ end }}
+                        <div class="info">
+                            <h2>{{ .Username }}</h2>
+                            <p>Moderator</p>
+                        </div>
+                    </div>
+                    {{ end }}
+                </div>
+            </div>
+            {{ if $isConnected }}
+            <div class="filter">
+                <div class="list_f card">
+                    <img src="/server/img/woly.png" alt="" class="woly">
+                    <h1 class="pancarte">Filtre</h1>
+                    <form action="" method="post">                        
+                        <div class="like checkFilter">
+                            <input type="checkbox" name="like" id="" value="isCheck">
+                            <label for="like">Like Only</label>
+                        </div>                        
+                        <div class="dlike checkFilter">
+                            <input type="checkbox" name="dlike" id="" value="isCheck">
+                            <label for="dlike">Dislike Only</label>
+                        </div>                        
+                        <div class="mine checkFilter">
+                            <input type="checkbox" name="mine" id="" value="isCheck">
+                            <label for="mine">Mine Only</label>
+                        </div>
+                        <input type="submit" value="Search" class="button">
+                    </form>
+                </div>
+            </div>
+            {{ end }}
+            {{ end }}
+
+            {{ end }}
+
+            {{ if or ($ImAdmin) ($ImMod) }}
+            <div class="moderate moderation">
+                <div class="members">
+                    <div class="list_m card">
+                        <img src="/server/img/woly.png" alt="" class="woly">
+                        <h1 class="pancarte">Bans Members</h1>
+                        <div class="content">
+                            {{ range .Bans}}
+                            <div class="member">
+                                {{ if .Pic }}
+                                <img src="{{ .Pic }}" alt="">
+                                {{ else }}
+                                <img src="/server/img/wolf.png" alt="">
+                                {{ end }}
+                                <div class="userInfo">
+                                    <h2>{{ .Username}}</h2>
+                                    <p>{{ if .Status}} Online {{ else }} Offline {{ end }}</p>
+                                </div>
+                                <a class="interact moderation" href="/add_ban?&idtopic={{ $topic }}&creator={{ .Username}}">
+                                    <img src="./server/img/prohibited.png" alt="">
+                                </a>
+                            </div>
+                            {{ end }}
+                        </div>
+                    </div>
+                </div>
+
+                {{if $ImAdmin }}
+                <div class="list_ma">
+                    <a href="/supp_topic?idtopic={{ .Topic.Id }}" class="suppTopic">
+                        <img src="./server/img/delete.png" alt="">
+                        <p>Remove the topic</p>
+                    </a>
+                </div>
+                {{ end}}
+            </div>
+            {{ end }}
+        </div>
+
+        <div class="sect2">
+            <div class="head">
+                <h1>{{ .Topic.Name}}</h1>
+                {{ if $isConnected }}
+                {{ if $imMember }}
+                <form action="/add_post?id={{ .Topic.Id }}" method="post" enctype="multipart/form-data" class="members" autocomplete="off">
+                    <input type="text" name="post_content" id="" placeholder="Write some texte ..."  autocomplete="off">
+                    <label for="postpicture" class="clicontainer"><img src="/server/img/insertimg.png" alt="" class="clic"></label><input type="file" id="postpicture" name="postpic" accept="image/png, image/jpeg">
+                    <input type="submit" value="Post" class="button">
+                </form>
+                {{ end }}
+                {{ end }}
+            </div>
+            <div class="list_p">
+                {{ range .Posts}}
+                <div class="publication card">
+                    {{ if $isConnected}}
+                    {{ if or ($ImAdmin) ($ImMod) (.IsMine) }}
+                    <a href="javascript:showInteractDiv(interact_div_{{ .Id }})" class="interact_btn">
+                        <img src="/server/img/more.png" alt="">
+                    </a>
+                    <div class="interact_div card hidden" id="interact_div_{{ .Id }}">
+                        {{ if .IsMine }}
+                        <a href="javascript:editPost({{ .Id }}, `{{ .Content }}`,{{ $topic }})">
+                            <img src="./server/img/pencil.png" alt="">
+                            <p>Edit</p>
+                        </a>
+                        {{ end }}
+                        <a href="/supp_post?id={{ .Id }}&idtopic={{ .Topics.Id }}">
+                            <img src="./server/img/fermer.png" alt="">
+                            <p>Remove</p>
+                        </a>
+                    </div>
+                    {{ end }}
+                    {{ end }}
+                    <div class="content">
+                        <div class="textcont">
+                            <a href="/profil?usr={{ .Creator.Username }}" class="userInfo">
+                                {{ if .Creator.Pic }}
+                                <img src="{{ .Creator.Pic }}" alt="">
+                                {{ else }}
+                                <img src="/server/img/wolf.png" alt="">
+                                {{ end }}
+                                <h3>{{ .Creator.Username }}</h3>
+                            </a>
+                            <div class="value">
+                                {{ if .Pic }}
+                                <img src="{{ .Pic }}" alt="" class="post_pic">
+                                {{ end }}
+                                <p>{{ .Content}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="interact">
+                        <a {{ if $isConnected }} href="/add_like?id={{ .Id }}&idtopic={{ .Topics.Id }}" {{ end }}>
+                            {{ if eq .ILike true }}
+                            <img src="./server/img/heart_s.png" alt="">
+                            {{ else }}
+                            <img src="./server/img/heart.png" alt="">
+                            {{ end }}
+                        </a>
+                        <p>{{ .Like }}</p>
+                        <a {{ if $isConnected }} href="/add_dislike?id={{ .Id }}&idtopic={{ .Topics.Id }}" {{ end }}>
+                            {{ if eq .IDislike true }}
+                            <img src="./server/img/dislike_s.png" alt="">
+                            {{ else }}
+                            <img src="./server/img/dislike.png" alt="">
+                            {{ end }}
+                        </a>
+                        <p>{{ .Dislike }}</p>
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+
+        <div class="sect3">
+            <div class="members">
+                <div class="list_m card">
+                    <img src="/server/img/woly.png" alt="" class="woly">
+                    <h1 class="pancarte">Members</h1>
+                    <div class="content">
+                        {{ range .Members}}
+                        <div class="member">
+                            {{ if .Pic }}
+                            <img src="{{ .Pic }}" alt="">
+                            {{ else }}
+                            <img src="/server/img/wolf.png" alt="">
+                            {{ end }}
+                            <a href="/profil?usr={{ .Username }}" class="userInfo">
+                                <h2>{{ .Username}}</h2>
+                                <p>{{ .State }}</p>
+                            </a>
+
+                            {{ if $ImAdmin }}
+                            <a class="interact moderation" href="javascript:showInteractMember({{ .Username}})">
+                                <img src="./server/img/more.png" alt="">
+                            </a>
+                            <div class="interaction card hidden" id="{{ .Username }}">
+                                <a href="/add_ban?&idtopic={{ $topic }}&creator={{ .Username}}">
+                                    <img src="./server/img/prohibited.png" alt="">
+                                    <p>Ban</p>
+                                </a>
+                                <a href="/add_moderateur?&idtopic={{ $topic }}&creator={{ .Username}}">
+                                    <img src="./server/img/couronne.png" alt="">
+                                    <p>Add to Moderators</p>
+                                </a>
+                            </div>
+                            {{ end }}
+                        </div>
+                        {{ end}}
+                    </div>
+                </div>
+            </div>
+                
+            {{ if $isConnected}}
+            <form action="/add_follow?id={{ .Topic.Id }}" method="post" class="not-members visit">
+                <input type="submit" value="{{ if ne $imMember true }}Join this Topic{{ else }}Leave Topic{{ end }}"
+                    class="button">
+            </form>
+            {{ end }}
+        </div>
+    </div>
+    <!-- MODAL EDIT -->
+    <div class="editDiv hidden" id="editDiv">
+        <form action="" method="post" class="card" id="editform">
+            <div class="pancarte">
+                <h1>Edit Post</h1>
+            </div>
+            <img src="/server/img/woly.png" alt="" class="woly">
+            <textarea type="text" name="new_content" placeholder="update" id="edit_content"  autocomplete="off"></textarea>
+            <input type="submit" placeholder="content" class="button">
+        </form>
+    </div>
+
+    <script src="./server/js/interract_post.js"></script>
+    <script src="./server/js/display_topic_creation.js"></script>
+    <script src="./server/js/topic_accessibility.js"></script>
+    <script src="./server/js/display_pophover.js"></script>
+    <script src="./server/js/topic_interact.js"></script>
+</body>
+
+</html>

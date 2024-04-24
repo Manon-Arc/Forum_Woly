@@ -1,0 +1,223 @@
+:root {
+  --night: #12130fff;
+  --french-grey: #B5B5C3;
+  --emerald: #57b269ff;
+  --celadon: #8fcb9bff;
+  --lavender-web: #ebebffff;
+  --lavender-web-2: #eeeeffff;
+}
+
+* {
+  margin: 0;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  padding: 0;
+  font-size: 1em;
+  text-decoration: none;
+  list-style: none;
+  color: var(--night);
+  user-select: none;
+}
+
+body {
+  overflow: hidden;
+  background-color: #e5e5e5;
+  height: 100vh;
+  width: 100vw;
+}
+
+.hidden {
+  display: none !important;
+}
+
+input[type=text], input[type=password], input[type=email] {
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-bottom: 1px solid var(--french-grey);
+}
+input[type=text]::placeholder, input[type=password]::placeholder, input[type=email]::placeholder {
+  color: var(--french-grey);
+}
+
+input[type=checkbox] {
+  margin: 3px;
+  -webkit-appearance: none;
+  appearance: none;
+  font: inherit;
+  color: currentColor;
+  width: 1em;
+  height: 1em;
+  border: 0.05em solid currentColor;
+  border-radius: 0.15em;
+  display: grid;
+  place-content: center;
+}
+input[type=checkbox]::before {
+  content: "";
+  width: 0.5em;
+  height: 0.5em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--emerald);
+  transform-origin: bottom left;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+input[type=checkbox]:checked::before {
+  transform: scale(1);
+}
+
+.button {
+  padding: 15px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+  background-color: var(--emerald);
+  border: none;
+}
+
+.card {
+  background-color: white;
+  border-radius: 20px;
+}
+
+.pophover {
+  z-index: 1;
+}
+
+.header {
+  height: 10vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.header .left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 2vw;
+}
+.header .left img {
+  height: 50%;
+  margin: 10px;
+}
+.header .left .backbtn {
+  height: 30%;
+}
+.header .left h1 {
+  font-size: 1.3em;
+}
+.header .connectionBtn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  position: relative;
+  margin-right: 20px;
+}
+.header .connectionBtn a {
+  margin: 10px;
+}
+.header .currentUser {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  position: relative;
+}
+.header .currentUser .popshow {
+  height: 50%;
+}
+.header .currentUser img {
+  height: 100%;
+  border-radius: 10px;
+  margin-right: 30px;
+}
+.header .currentUser a.button {
+  display: block;
+  max-height: 50%;
+  margin: 20px;
+}
+.header .currentUser .pophover {
+  display: none;
+  position: absolute;
+  flex-direction: column;
+  width: 100px;
+  padding: 15px;
+  bottom: -100%;
+  right: 30px;
+}
+.header .currentUser .pophover .element {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.header .currentUser .pophover .element img {
+  border-radius: 0;
+  height: 20px;
+  width: 20px;
+  margin: 5px;
+}
+
+.topicCreation {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.301);
+}
+.topicCreation form {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  width: 30vw;
+  position: relative;
+}
+.topicCreation form .pancarte {
+  position: absolute;
+  left: 50%;
+  top: -5%;
+  transform: translate(-50%, 0%);
+  border-style: solid;
+  border-width: 1px;
+  padding: 10px;
+  background-color: white;
+}
+.topicCreation form .woly {
+  position: absolute;
+  left: 50%;
+  top: -30%;
+  transform: translate(-50%, 0%);
+  width: 40%;
+  z-index: -1;
+}
+.topicCreation form label {
+  margin-top: 10px;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+.topicCreation form input[type=text] {
+  padding: 10px;
+  border-style: solid;
+  border-width: 1px;
+}
+.topicCreation form textarea {
+  padding: 10px;
+  border-style: solid;
+  border-width: 1px;
+  height: 20vh;
+  resize: none;
+}
+.topicCreation form input[type=submit] {
+  margin: 20px;
+}
+
+/*# sourceMappingURL=style.css.map */

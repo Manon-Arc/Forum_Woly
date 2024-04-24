@@ -1,0 +1,94 @@
+:root {
+  --night: #12130fff;
+  --french-grey: #B5B5C3;
+  --emerald: #57b269ff;
+  --celadon: #8fcb9bff;
+  --lavender-web: #ebebffff;
+  --lavender-web-2: #eeeeffff;
+}
+
+* {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+  font-size: 1em;
+  text-decoration: none;
+  list-style: none;
+  color: var(--night);
+}
+
+body {
+  overflow: hidden;
+  background-color: #fafafa;
+  height: 100vh;
+}
+
+.button {
+  padding: 15px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+  background-color: var(--emerald);
+  border: none;
+}
+
+.card {
+  background-color: white;
+  border-radius: 20px;
+}
+
+.topicCreation {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.topicCreation form {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  width: 30vw;
+  position: relative;
+}
+.topicCreation form .pancarte {
+  position: absolute;
+  left: 50%;
+  top: -5%;
+  transform: translate(-50%, 0%);
+  border-style: solid;
+  border-width: 1px;
+  padding: 10px;
+  background-color: white;
+}
+.topicCreation form .woly {
+  position: absolute;
+  left: 50%;
+  top: -30%;
+  transform: translate(-50%, 0%);
+  width: 40%;
+  z-index: -1;
+}
+.topicCreation form label {
+  margin-top: 10px;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+.topicCreation form input[type=text] {
+  padding: 10px;
+  border-style: solid;
+  border-width: 1px;
+}
+.topicCreation form textarea {
+  padding: 10px;
+  border-style: solid;
+  border-width: 1px;
+  height: 20vh;
+  resize: none;
+}
+.topicCreation form input[type=submit] {
+  margin: 20px;
+}
+
+/*# sourceMappingURL=style_topic_creation.css.map */

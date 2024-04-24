@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./server/css/style_index.css">
+    <link rel="stylesheet" href="./server/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/server/img/logo.png">
+    <title>Woly</title>
+</head>
+
+<body>
+
+    {{ $isConnected := .Isconnected}}
+
+    <div class="header">
+        <div class="left">
+            <img src="/server/img/logo.png" alt="">
+            <h1>Woly</h1>
+        </div>
+        {{ if $isConnected }}
+        <div class="currentUser">
+            <a href="javascript:showCreation()" class="button">+ Create</a>
+            <a href="javascript:showPophover()" class="popshow">
+                <img src="./server/img/wolf.png" alt="" id="imgCu">
+            </a>
+            <div id="cUpop" class="pophover card">
+                <a href="/profil?usr={{ .CurrentUser.Username }}" class="element" id="profil">
+                    <img src="./server/img/profil.png" alt="">
+                    <p>Profil</p>
+                </a>
+                {{ if ne $isConnected true }}
+                <a href="/connection?type=l" class="element" id="login">
+                    <img src="./server/img/login.png" alt="">
+                    <p>Login</p>
+                </a>
+                <a href="/connection?type=r" class="element" id="register">
+                    <img src="./server/img/register.png" alt="">
+                    <p>Register</p>
+                </a>
+                {{ end }}
+                <a href="/logout" class="element" id="logout">
+                    <img src="./server/img/logout.png" alt="">
+                    <p>Logout</p>
+                </a>
+            </div>
+        </div>
+        {{ else }}
+        <div class="connectionBtn">
+            <a href="/connection?type=r">Register</a>
+            <a href="/connection?type=l" class="button">Login</a>
+        </div>
+        {{ end }}
+    </div>
+    <div class="container">
+        <div class="sect1">
+            <div class="filter">
+                <div class="list_f card">
+                    <img src="/server/img/woly.png" alt="" class="woly">
+                    <h1 class="pancarte">Filtre</h1>
+                    <div class="selectShow">
+                        <a href="javascript:switchMain()" class="select" id="topic_btn">Topics</a>
+                        <a href="javascript:switchMain()" class="select" id="post_btn">Posts</a>
+                    </div>
+                    <form action="" method="post">
+                        <input type="text" name="tpname" id="" placeholder="Search a topic" autocomplete="off">
+                        <input type="text" name="tpcat" id="" placeholder="Search Categories" autocomplete="off">
+                        <div class="asc checkFilter">
+                            <input type="checkbox" name="asc" id="" value="isCheck">
+                            <label for="asc">A -> Z</label>
+                        </div>
+                        <div class="desc checkFilter">
+                            <input type="checkbox" name="desc" id="" value="isCheck">
+                            <label for="desc">Z -> A</label>
+                        </div>
+                        <div class="nfollow checkFilter">
+                            <input type="checkbox" name="nfollow" id="" value="isCheck">
+                            <label for="nfollow">Not Follow</label>
+                        </div>
+
+                        <input type="submit" value="Search" class="button">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="sect2">
+            <div class="all_topic hidden" id="topic_div">
+                {{ range .All_Topics }}
+                <a class="topic card" href="/topic?id={{ .Id}}">
+                    <img src="/server/img/wolf.png" alt="">
+                    <div class="info">
+                        <h2>{{ .Name}}</h2>
+                        <div class="categorie">{{ range .Categorie }}<p>{{ . }}</p>{{ end }}</div>
+                    </div>
+                </a>
+                {{ end }}
+            </div>
+
+            <div class="f_post hidden" id="post_div">
+                {{ range .Posts}}
+                <div class="post">
+                    <div class="topic_info">
+                        <img src="{{ .Topics.Picture }}" alt="">
+                        <h1>{{ .Topics.Name }}</h1>
+                    </div>
+                    <div class="publication card">
+                        <div class="content">
+                            <div class="textcont">
+                                <a href="/profil?usr={{ .Creator.Username }}" class="userInfo">
+                                    {{ if .Creator.Pic }}
+                                    <img src="{{ .Creator.Pic }}" alt="">
+                                    {{ else }}
+                                    <img src="/server/img/wolf.png" alt="">
+                                    {{ end }}
+                                    <h3>{{ .Creator.Username}}</h3>
+                                </a>
+                                <div class="value">
+                                    {{ if .Pic }}
+                                    <img src="{{ .Pic }}" alt="" class="post_pic">
+                                    {{ end }}
+                                    <p>{{ .Content}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+
+        <div class="sect3" id="sect3">
+            {{ if $isConnected }}
+            <div class="topics">
+                <div class="list_t card">
+                    <img src="/server/img/woly.png" alt="" class="woly">
+                    <h1 class="pancarte">FOLLOWS</h1>
+                    {{ range .Follow_Topics}}
+                    <a class="topic" href="/topic?id={{ .Id}}">
+                        <img src="/server/img/wolf.png" alt="">
+                        <div class="info">
+                            <h2>{{ .Name}}</h2>
+                            <div class="categorie">{{ range .Categorie }}<p>{{ . }}</p>{{ end }}</div>
+                        </div>
+                    </a>
+                    {{ end}}
+                </div>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+    <script src="./server/js/display_topic_creation.js"></script>
+    <script src="./server/js/display_pophover.js"></script>
+    <script src="./server/js/interract_filter.js"></script>
+</body>
+
+</html>

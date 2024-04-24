@@ -1,0 +1,540 @@
+:root {
+  --night: #12130fff;
+  --french-grey: #b5b5c3;
+  --emerald: #57b269ff;
+  --celadon: #8fcb9bff;
+  --lavender-web: #ebebffff;
+  --lavender-web-2: #eeeeffff;
+}
+
+* {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+  font-size: 1em;
+  text-decoration: none;
+  list-style: none;
+  color: var(--night);
+}
+
+body {
+  overflow: hidden;
+  background-color: #e5e5e5;
+  height: 100vh;
+  width: 100vw;
+}
+
+.hidden {
+  display: none;
+}
+
+.button {
+  padding: 15px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+  background-color: var(--emerald);
+}
+
+.card {
+  background-color: white;
+  border-radius: 20px;
+}
+
+.editDiv {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.301);
+}
+.editDiv form {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  width: 30vw;
+  position: relative;
+}
+.editDiv form .pancarte {
+  position: absolute;
+  left: 50%;
+  top: -5%;
+  transform: translate(-50%, 0%);
+  border-style: solid;
+  border-width: 1px;
+  padding: 10px;
+  background-color: white;
+}
+.editDiv form .woly {
+  position: absolute;
+  left: 50%;
+  top: -30%;
+  transform: translate(-50%, 0%);
+  width: 40%;
+  z-index: -1;
+}
+.editDiv form input[type=submit] {
+  margin: 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 90vh;
+  width: 100vw;
+}
+.container .sect1 {
+  width: 375px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5vh;
+}
+.container .sect1 .admin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+.container .sect1 .admin .list_ad {
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+}
+.container .sect1 .admin .list_ad .moderator {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.container .sect1 .admin .list_ad .moderator img {
+  height: 60px;
+  width: 60px;
+  border-radius: 20px;
+  margin: 10px;
+}
+.container .sect1 .admin .list_ad .moderator .info {
+  display: flex;
+  flex-direction: column;
+}
+.container .sect1 .admin .list_ad .moderator .info p {
+  font-size: 0.6em;
+}
+.container .sect1 .moderate {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  margin: 30px;
+  margin-top: 100px;
+  width: 100%;
+}
+.container .sect1 .moderate .list_m {
+  margin: 10px 30px;
+  height: 50vh;
+  width: 100%;
+  position: relative;
+}
+.container .sect1 .moderate .list_m .woly {
+  width: 50%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -68%);
+  z-index: -1;
+}
+.container .sect1 .moderate .list_m .pancarte {
+  position: absolute;
+  left: 50%;
+  width: 40%;
+  text-align: center;
+  border-style: solid;
+  border-width: 1px;
+  padding: 10px;
+  transform: translate(-50%, -70%);
+  background-color: white;
+  font-weight: bolder;
+}
+.container .sect1 .moderate .list_m .content {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+.container .sect1 .moderate .list_m .content::-webkit-scrollbar {
+  display: none;
+}
+.container .sect1 .moderate .list_m .content .member {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+}
+.container .sect1 .moderate .list_m .content .member img {
+  height: 60px;
+  width: 60px;
+  border-radius: 20px;
+  margin: 10px;
+}
+.container .sect1 .moderate .list_m .content .member .userInfo {
+  display: flex;
+  flex-direction: column;
+}
+.container .sect1 .moderate .list_m .content .member .userInfo p {
+  font-size: 0.6em;
+}
+.container .sect1 .moderate .list_m .content .member .interact {
+  position: absolute;
+  right: 10px;
+}
+.container .sect1 .moderate .list_m .content .member .interact img {
+  height: 15px;
+  width: 15px;
+}
+.container .sect1 .moderate .list_m .content .member .interaction {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  right: 35px;
+  padding: 5px;
+}
+.container .sect1 .moderate .list_m .content .member .interaction a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.container .sect1 .moderate .list_m .content .member .interaction a img {
+  height: 20px;
+  width: 20px;
+}
+.container .sect1 .moderate .list_ma {
+  height: 50vh;
+  margin: 10px 30px;
+}
+.container .sect1 .moderate .list_ma .suppTopic {
+  margin: 15px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: red;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 15px;
+  justify-content: center;
+}
+.container .sect1 .moderate .list_ma .suppTopic img {
+  height: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.container .sect1 .moderate .list_ma .suppTopic p {
+  margin-left: 5px;
+  font-weight: bold;
+}
+.container .sect1 .filter {
+  width: 100%;
+  margin-top: 100px;
+}
+.container .sect1 .filter .list_f {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 30px;
+  background-color: white;
+  position: relative;
+  padding-top: 50px;
+}
+.container .sect1 .filter .list_f .woly {
+  width: 50%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -110%);
+  z-index: -1;
+}
+.container .sect1 .filter .list_f .pancarte {
+  position: absolute;
+  left: 50%;
+  width: 40%;
+  text-align: center;
+  border-style: solid;
+  border-width: 1px;
+  padding: 10px;
+  transform: translate(-50%, -200%);
+  background-color: white;
+  font-weight: bolder;
+}
+.container .sect1 .filter .list_f form {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  margin: 20px 0px;
+  flex-direction: column;
+  align-items: center;
+}
+.container .sect1 .filter .list_f form .checkFilter {
+  margin: 5px;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+}
+.container .sect1 .filter .list_f form .checkFilter input {
+  margin: 5px;
+}
+.container .sect1 .filter .list_f form .button {
+  margin-top: 20px;
+}
+.container .sect2 {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+}
+.container .sect2 .head {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.container .sect2 .head h1 {
+  text-align: center;
+  font-size: 1.8em;
+  margin: 20px;
+}
+.container .sect2 .head form {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.container .sect2 .head form input[type=text] {
+  margin: 10px;
+  width: 50%;
+  min-height: 30px;
+  border: none;
+  border-radius: 30px;
+  padding: 15px 30px;
+}
+.container .sect2 .head form input[type=text]::placeholder {
+  color: var(--french-grey);
+}
+.container .sect2 .head form #postpicture {
+  display: none;
+}
+.container .sect2 .head form .clicontainer {
+  cursor: pointer;
+}
+.container .sect2 .head form .clic {
+  height: 20px;
+}
+.container .sect2 .head form input[type=submit] {
+  margin: 10px;
+  background-color: var(--emerald);
+  border: none;
+  color: white;
+}
+.container .sect2 .list_p {
+  overflow-y: scroll;
+  height: 100%;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.container .sect2 .list_p::-webkit-scrollbar {
+  display: none;
+}
+.container .sect2 .list_p .publication {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+.container .sect2 .list_p .publication .interact_btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  visibility: hidden;
+}
+.container .sect2 .list_p .publication .interact_btn img {
+  height: 15px;
+}
+.container .sect2 .list_p .publication:hover .interact_btn {
+  visibility: visible;
+}
+.container .sect2 .list_p .publication .interact_div {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+}
+.container .sect2 .list_p .publication .interact_div a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.container .sect2 .list_p .publication .interact_div a img {
+  height: 15px;
+  margin: 5px;
+}
+.container .sect2 .list_p .publication .content {
+  max-height: 90%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.container .sect2 .list_p .publication .content .textcont .userInfo {
+  display: flex;
+  flex-direction: row;
+}
+.container .sect2 .list_p .publication .content .textcont .userInfo img {
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  margin: 10px;
+}
+.container .sect2 .list_p .publication .content .textcont .userInfo h3 {
+  margin: auto 0;
+}
+.container .sect2 .list_p .publication .content .textcont .value {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.container .sect2 .list_p .publication .content .textcont .value .post_pic {
+  width: 30%;
+  margin: 10px;
+}
+.container .sect2 .list_p .publication .content .textcont .value p {
+  max-width: 50%;
+  margin: 20px;
+}
+.container .sect2 .list_p .publication .interact {
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.container .sect2 .list_p .publication .interact img {
+  margin: auto 5px;
+  height: 20px;
+  width: 20px;
+}
+.container .sect2 .list_p .publication .interact p {
+  font-weight: 700;
+  margin-right: 10px;
+}
+.container .members {
+  display: flex;
+}
+
+.sect3 {
+  width: 375px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+}
+.sect3 .members {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  margin: 30px;
+  margin-top: 100px;
+  width: 100%;
+}
+.sect3 .members .list_m {
+  margin: 10px 30px;
+  height: 50vh;
+  position: relative;
+}
+.sect3 .members .list_m .woly {
+  width: 50%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -68%);
+  z-index: -1;
+}
+.sect3 .members .list_m .pancarte {
+  position: absolute;
+  left: 50%;
+  width: 40%;
+  text-align: center;
+  border-style: solid;
+  border-width: 1px;
+  padding: 10px;
+  transform: translate(-50%, -70%);
+  background-color: white;
+  font-weight: bolder;
+}
+.sect3 .members .list_m .content {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+.sect3 .members .list_m .content::-webkit-scrollbar {
+  display: none;
+}
+.sect3 .members .list_m .content .member {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+}
+.sect3 .members .list_m .content .member img {
+  height: 60px;
+  width: 60px;
+  border-radius: 20px;
+  margin: 10px;
+}
+.sect3 .members .list_m .content .member .userInfo {
+  display: flex;
+  flex-direction: column;
+}
+.sect3 .members .list_m .content .member .userInfo p {
+  font-size: 0.6em;
+}
+.sect3 .members .list_m .content .member .interact {
+  position: absolute;
+  right: 10px;
+}
+.sect3 .members .list_m .content .member .interact img {
+  height: 15px;
+  width: 15px;
+}
+.sect3 .members .list_m .content .member .interaction {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  right: 35px;
+  padding: 5px;
+}
+.sect3 .members .list_m .content .member .interaction a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.sect3 .members .list_m .content .member .interaction a img {
+  height: 20px;
+  width: 20px;
+}
+
+/*# sourceMappingURL=style_topic.css.map */
